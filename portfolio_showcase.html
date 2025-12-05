@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AURA - Data Science Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1E3A5F;
+            --secondary: #3498DB;
+            --accent: #27AE60;
+            --dark: #2C3E50;
+            --light: #ECF0F1;
+            --text: #333333;
+            --gradient: linear-gradient(135deg, #1E3A5F 0%, #3498DB 100%);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--light);
+        }
+
+        /* Header Section */
+        .hero {
+            background: var(--gradient);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            letter-spacing: 5px;
+        }
+
+        .hero .subtitle {
+            font-size: 1.4rem;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+
+        .badge-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .badge {
+            background: rgba(255,255,255,0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .badge.success { background: var(--accent); }
+        .badge.progress { background: #f39c12; }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Cards */
+        .section-title {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--secondary);
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .card h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+
+        .card p {
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        /* Progress Section */
+        .progress-container {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .milestone {
+            margin-bottom: 25px;
+        }
+
+        .milestone-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .milestone-name {
+            font-weight: bold;
+            color: var(--dark);
+        }
+
+        .milestone-percent {
+            color: var(--secondary);
+            font-weight: bold;
+        }
+
+        .progress-bar {
+            background: var(--light);
+            border-radius: 10px;
+            height: 20px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 10px;
+            transition: width 1s ease;
+        }
+
+        .progress-fill.milestone1 { 
+            background: var(--accent); 
+            width: 75%;
+        }
+
+        .progress-fill.milestone2 { 
+            background: var(--secondary); 
+            width: 0%;
+        }
+
+        .progress-fill.milestone3 { 
+            background: var(--primary); 
+            width: 0%;
+        }
+
+        /* Sessions Table */
+        .sessions-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .sessions-table th {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .sessions-table td {
+            padding: 15px;
+            border-bottom: 1px solid var(--light);
+        }
+
+        .sessions-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .status-complete {
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .status-progress {
+            color: #f39c12;
+            font-weight: bold;
+        }
+
+        .status-pending {
+            color: #95a5a6;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-item {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        .skill-name {
+            font-weight: bold;
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+
+        .skill-bar {
+            background: var(--light);
+            border-radius: 5px;
+            height: 8px;
+            overflow: hidden;
+        }
+
+        .skill-level {
+            height: 100%;
+            background: var(--gradient);
+            border-radius: 5px;
+        }
+
+        /* Tech Stack */
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            padding: 30px;
+            background: white;
+            border-radius: 15px;
+            margin-bottom: 50px;
+        }
+
+        .tech-item {
+            background: var(--gradient);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 500;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        footer a {
+            color: var(--secondary);
+            text-decoration: none;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <header class="hero">
+        <h1>✨ AURA</h1>
+        <p class="subtitle">The Intelligent Marketing Data Engine</p>
+        <div class="badge-container">
+            <span class="badge">🐍 Python</span>
+            <span class="badge">📊 Pandas</span>
+            <span class="badge">🤖 Scikit-Learn</span>
+            <span class="badge">🧠 TensorFlow</span>
+            <span class="badge">📈 Matplotlib</span>
+        </div>
+        <div class="badge-container">
+            <span class="badge success">✅ 3 Sessions Complete</span>
+            <span class="badge progress">🔄 Session 4 In Progress</span>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Progress Section -->
+        <h2 class="section-title">📊 Project Progress</h2>
+        <div class="progress-container">
+            <div class="milestone">
+                <div class="milestone-header">
+                    <span class="milestone-name">📈 Milestone 1: Data Analysis</span>
+                    <span class="milestone-percent">75%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill milestone1"></div>
+                </div>
+            </div>
+            <div class="milestone">
+                <div class="milestone-header">
+                    <span class="milestone-name">🤖 Milestone 2: ML Modeling</span>
+                    <span class="milestone-percent">0%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill milestone2"></div>
+                </div>
+            </div>
+            <div class="milestone">
+                <div class="milestone-header">
+                    <span class="milestone-name">🧠 Milestone 3: Deep Learning</span>
+                    <span class="milestone-percent">0%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill milestone3"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Session Overview -->
+        <h2 class="section-title">📚 Session Overview</h2>
+        <div class="progress-container">
+            <table class="sessions-table">
+                <thead>
+                    <tr>
+                        <th>Session</th>
+                        <th>Topic</th>
+                        <th>Dataset</th>
+                        <th>Key Techniques</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Data Import & Cleaning</td>
+                        <td>NSMES1988</td>
+                        <td>Memory optimization, data types</td>
+                        <td class="status-complete">✅ Complete</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Statistical Analysis</td>
+                        <td>NSMES1988</td>
+                        <td>Descriptive stats, correlations</td>
+                        <td class="status-complete">✅ Complete</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Pandas Operations</td>
+                        <td>NSMES1988</td>
+                        <td>GroupBy, pivot tables, crosstab</td>
+                        <td class="status-complete">✅ Complete</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Data Visualization</td>
+                        <td>NSMES1988</td>
+                        <td>matplotlib, seaborn, dashboards</td>
+                        <td class="status-progress">🔄 In Progress</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Regression</td>
+                        <td>FloridaBikeRentals</td>
+                        <td>Linear/Ridge/Lasso regression</td>
+                        <td class="status-pending">⏳ Pending</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>Classification</td>
+                        <td>AdultCensusIncome</td>
+                        <td>Logistic regression, SMOTE</td>
+                        <td class="status-pending">⏳ Pending</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>Clustering</td>
+                        <td>CC_GENERAL</td>
+                        <td>PCA, K-Means</td>
+                        <td class="status-pending">⏳ Pending</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>Recommendations</td>
+                        <td>Movies + Ratings</td>
+                        <td>Collaborative filtering</td>
+                        <td class="status-pending">⏳ Pending</td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>Neural Networks</td>
+                        <td>Churn_Modelling</td>
+                        <td>ANN, dropout, callbacks</td>
+                        <td class="status-pending">⏳ Pending</td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>Transfer Learning</td>
+                        <td>Face Mask Images</td>
+                        <td>EfficientNetB0, fine-tuning</td>
+                        <td class="status-pending">⏳ Pending</td>
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <td>CNN-LSTM Hybrid</td>
+                        <td>Product Reviews</td>
+                        <td>Embedding, CNN, LSTM</td>
+                        <td class="status-pending">⏳ Pending</td>
+                    </tr>
+                    <tr>
+                        <td>12</td>
+                        <td>Autoencoders</td>
+                        <td>Dental X-rays</td>
+                        <td>Denoising autoencoders</td>
+                        <td class="status-pending">⏳ Pending</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Key Highlights -->
+        <h2 class="section-title">🎯 Key Highlights</h2>
+        <div class="card-grid">
+            <div class="card animate delay-1">
+                <div class="card-icon">📊</div>
+                <h3>Data Wrangling</h3>
+                <p>Expert-level pandas manipulation including memory optimization, type conversion, and efficient data transformations.</p>
+            </div>
+            <div class="card animate delay-2">
+                <div class="card-icon">📈</div>
+                <h3>Statistical Analysis</h3>
+                <p>Comprehensive statistical analysis from descriptive statistics to correlation matrices and distribution analysis.</p>
+            </div>
+            <div class="card animate delay-3">
+                <div class="card-icon">🎨</div>
+                <h3>Visualization</h3>
+                <p>Professional-grade visualizations using matplotlib, seaborn, and interactive dashboard design.</p>
+            </div>
+        </div>
+
+        <!-- Skills Section -->
+        <h2 class="section-title">🎓 Skills Matrix</h2>
+        <div class="skills-grid">
+            <div class="skill-item">
+                <div class="skill-name">Data Wrangling</div>
+                <div class="skill-bar">
+                    <div class="skill-level" style="width: 95%"></div>
+                </div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-name">Statistical Analysis</div>
+                <div class="skill-bar">
+                    <div class="skill-level" style="width: 90%"></div>
+                </div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-name">Visualization</div>
+                <div class="skill-bar">
+                    <div class="skill-level" style="width: 85%"></div>
+                </div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-name">Machine Learning</div>
+                <div class="skill-bar">
+                    <div class="skill-level" style="width: 60%"></div>
+                </div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-name">Deep Learning</div>
+                <div class="skill-bar">
+                    <div class="skill-level" style="width: 40%"></div>
+                </div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-name">Git/Version Control</div>
+                <div class="skill-bar">
+                    <div class="skill-level" style="width: 80%"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tech Stack -->
+        <h2 class="section-title">🛠️ Technology Stack</h2>
+        <div class="tech-stack">
+            <span class="tech-item">Python 3.9+</span>
+            <span class="tech-item">pandas</span>
+            <span class="tech-item">NumPy</span>
+            <span class="tech-item">SciPy</span>
+            <span class="tech-item">matplotlib</span>
+            <span class="tech-item">seaborn</span>
+            <span class="tech-item">plotly</span>
+            <span class="tech-item">scikit-learn</span>
+            <span class="tech-item">TensorFlow</span>
+            <span class="tech-item">Keras</span>
+            <span class="tech-item">Jupyter</span>
+            <span class="tech-item">Git</span>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p><strong>AURA Data Science Portfolio</strong></p>
+        <p>Built with ❤️ by Mander | December 2025</p>
+        <p style="margin-top: 20px;">
+            <a href="#">GitHub</a> • 
+            <a href="#">LinkedIn</a> • 
+            <a href="#">Resume</a>
+        </p>
+    </footer>
+</body>
+</html>
