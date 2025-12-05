@@ -1,3 +1,4 @@
+# Raw NSMES1988 dataset - Original data before cleaning
 patient_id,age,gender,health,chronic,visits,income,region,education,marital,children,smoker,exercise,bmi,blood_pressure,cholesterol,diabetes,heart_disease,hospital_stay
 1,65,Male,Poor,Yes,12,25000,Northeast,High School,Married,0,No,Low,28.5,140/90,High,No,No,3
 2,34,Female,Excellent,No,2,75000,West,College,Single,0,No,High,22.1,110/70,Normal,No,No,0
