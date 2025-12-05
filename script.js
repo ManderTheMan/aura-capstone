@@ -111,40 +111,58 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Copy to clipboard functionality for code blocks
 function copyToClipboard(button, text) {
-    // Create a temporary textarea element
-    const textarea = document.createElement('textarea');
-    textarea.value = text;
-    textarea.style.position = 'fixed';
-    textarea.style.opacity = '0';
-    document.body.appendChild(textarea);
+    // Update button text to show copying
+    const originalText = button.textContent;
     
-    // Select and copy the text
-    textarea.select();
-    textarea.setSelectionRange(0, 99999); // For mobile devices
-    
-    try {
-        document.execCommand('copy');
+    // Try modern Clipboard API first (preferred method)
+    if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text)
+            .then(() => {
+                button.textContent = '✓ Copied!';
+                button.classList.add('copied');
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.classList.remove('copied');
+                }, 2000);
+            })
+            .catch(err => {
+                console.error('Failed to copy text: ', err);
+                button.textContent = '✗ Failed';
+                setTimeout(() => {
+                    button.textContent = originalText;
+                }, 2000);
+            });
+    } else {
+        // Fallback for older browsers or non-secure contexts
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
         
-        // Update button text to show success
-        const originalText = button.textContent;
-        button.textContent = '✓ Copied!';
-        button.classList.add('copied');
+        textarea.select();
+        textarea.setSelectionRange(0, 99999);
         
-        // Reset button after 2 seconds
-        setTimeout(() => {
-            button.textContent = originalText;
-            button.classList.remove('copied');
-        }, 2000);
-    } catch (err) {
-        console.error('Failed to copy text: ', err);
-        button.textContent = '✗ Failed';
-        setTimeout(() => {
-            button.textContent = 'Copy';
-        }, 2000);
+        try {
+            document.execCommand('copy');
+            button.textContent = '✓ Copied!';
+            button.classList.add('copied');
+            
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.classList.remove('copied');
+            }, 2000);
+        } catch (err) {
+            console.error('Failed to copy text: ', err);
+            button.textContent = '✗ Failed';
+            setTimeout(() => {
+                button.textContent = originalText;
+            }, 2000);
+        }
+        
+        document.body.removeChild(textarea);
     }
-    
-    // Remove the temporary textarea
-    document.body.removeChild(textarea);
 }
 
 // Add typing effect to hero title (optional enhancement)

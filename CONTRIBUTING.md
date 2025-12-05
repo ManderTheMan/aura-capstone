@@ -147,7 +147,7 @@ Make it even more beautiful:
 ### HTML Guidelines
 
 - Use semantic HTML5 elements
-- Maintain proper indentation (2 spaces)
+- Maintain proper indentation (4 spaces)
 - Include meaningful `id` and `class` names
 - Add comments for complex sections
 - Ensure accessibility (alt text, ARIA labels)
