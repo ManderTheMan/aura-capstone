@@ -278,16 +278,25 @@ aura-capstone/
 
 ## 🚀 Getting Started
 
+### 📖 Viewing the Project (Recommended)
+
+**All notebooks have been executed with outputs embedded!** You can view all visualizations, analyses, and results directly on GitHub without any setup.
+
+Simply browse to any session folder and click the `.ipynb` file to see the complete analysis.
+
+### 💻 Running Locally (Optional)
+
 ```bash
 # Clone the repository
-git clone https://github.com/[username]/aura-capstone.git
+git clone https://github.com/ManderTheMan/aura-capstone.git
 
 # Navigate to project directory
 cd aura-capstone
 
 # Create virtual environment
 python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+.\venv\Scripts\Activate.ps1  # Windows
+source venv/bin/activate      # macOS/Linux
 
 # Install dependencies
 pip install -r requirements.txt
@@ -295,6 +304,10 @@ pip install -r requirements.txt
 # Launch Jupyter
 jupyter notebook
 ```
+
+**Note**: Datasets are not included due to size (~100 MB). See [DATASETS.md](./DATASETS.md) for information on obtaining them, or simply view the notebooks with embedded outputs.
+
+📚 **For detailed instructions**: See [HOW_TO_RUN.md](./HOW_TO_RUN.md)
 
 ---
 
