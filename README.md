@@ -22,6 +22,8 @@ aura-capstone/
 └── tests/           # Unit and integration tests
 ```
 
+**📖 New to the project?** Start with [QUICKSTART.md](QUICKSTART.md) for a simple guide on where to put your files!
+
 See [STRUCTURE.md](STRUCTURE.md) for detailed organization guidelines and best practices.
 
 ## Getting Started
