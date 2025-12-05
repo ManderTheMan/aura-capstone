@@ -1,4 +1,4 @@
-# 🚀 Data Science Portfolio - AURA Capstone Project
+#  Data Science Portfolio - AURA Capstone Project
 
 <div align="center">
 
