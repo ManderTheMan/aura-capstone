@@ -1,0 +1,30 @@
+# Example Configuration File
+# Copy and customize for your needs
+
+project:
+  name: "AURA Marketing Platform"
+  version: "0.1.0"
+  
+data:
+  raw_dir: "data/raw"
+  processed_dir: "data/processed"
+  external_dir: "data/external"
+  
+models:
+  model_dir: "models"
+  default_algorithm: "random_forest"
+  random_seed: 42
+  
+preprocessing:
+  missing_strategy: "mean"
+  scaling_method: "standard"
+  
+training:
+  test_size: 0.2
+  validation_size: 0.1
+  cross_validation_folds: 5
+  
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "logs/app.log"
